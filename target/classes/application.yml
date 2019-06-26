@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.20.224.73:3306/sell?characterEncoding=utf-8&useSSL=false
+#10.20.224.73
+  jpa:
+    show-sql: true
+
+#json显示的字符如果为空则不显示
+#  jackson:
+#    default-property-inclusion: non_null
+
+  redis:
+    host: 10.20.224.73
+    port: 6379
+
+#url的前缀
+server:
+  servlet:
+    context-path: /sell
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  path: D:/study/code/springbootOrder/var/log/tomcat/
+#  file: D:/study/code/springbootOrder/var/log/tomcat/sell.log
+#  level:
+#     com.springboot.LoggerTest: debug
+##    root: warn
+##    org.springframework.web: debug
+##    org.hibernate: error
