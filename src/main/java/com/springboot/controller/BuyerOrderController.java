@@ -5,19 +5,22 @@ import com.springboot.VO.ResultVO;
 import com.springboot.converter.OrderForm2OrderDTOConverter;
 import com.springboot.dto.OrderDTO;
 import com.springboot.form.OrderForm;
+import com.springboot.service.BuyerService;
 import com.springboot.service.OrderService;
 import com.springboot.utils.ResultVOUtil;
 import enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +35,10 @@ public class BuyerOrderController {
     //创建需要service，引入
     @Autowired
     private OrderService orderService;
+
+    //用到买家service
+    @Autowired
+    private BuyerService buyerService;
 
     //创建订单
     //加上url的路径
@@ -73,10 +80,53 @@ public class BuyerOrderController {
 
 
     //订单列表
+    @GetMapping("/list")
+    public ResultVO<List<OrderDTO>> list(@RequestParam("openid") String openid,
+                                         @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                         @RequestParam(value = "size", defaultValue = "10") Integer size){
+        if (StringUtils.isEmpty(openid)){
+            log.error("【查询订单列表】openid为空");
+            throw  new SellException(ResultEnum.PARAM_ERROR);
+        }
+
+        PageRequest request =PageRequest.of(page,size);
+        Page<OrderDTO> orderDTOPage =orderService.findList(openid,request);
+
+        //转存Date -> long比较麻烦
+
+        return ResultVOUtil.success(orderDTOPage.getContent());
+
+
+    }
+
 
     //订单详情
+    @GetMapping("/detail")
+    public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
+                                     @RequestParam("orderId") String orderId) {
+        //todo 不安全的的做法，改进
+        //这里就是任何人都可以通过orderId来查订单,这里需要判断一下
+//        OrderDTO orderDTO = orderService.findOne(orderId);
+        //如果买家的openid跟传过来的openid是否相等，不相等抛出异常，不是本人订单
+        //在这里要写逻辑相对很繁琐，所以新建一个buyerService，显示结构更清晰
+//        if (!orderDTO.getBuyerOpenid().equalsIgnoreCase(openid)){
+//        }
+
+        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
+        return ResultVOUtil.success(orderDTO);
+
+    }
 
     //取消订单
-
+    @PostMapping("/cancel")
+    public ResultVO cancel(@RequestParam("openid") String openid,
+                           @RequestParam("orderId") String orderId) {
+       //TODO 不安全的的做法，改进
+//        OrderDTO orderDTO =orderService.findOne(orderId);
+        buyerService.cancelOrder(openid, orderId);
+        //订单不用返回对象，直接返回会成功
+       // orderService.cancel(orderDTO);
+        return ResultVOUtil.succes();
+    }
 
 }

@@ -31,7 +31,7 @@ public class OrderForm2OrderDTOConverter {
         orderDTO.setBuyerOpenid(orderForm.getOpenid());
 
         //以前都用BeanUtils方法来转,但是这里不行
-        //因为orderDTO定义的是buyer_name,而orderForm中定义的是name,名字不一样不能转
+        //因为orderDTO定义的是buyer_name,而orderForm中定义的是nam e,名字不一样不能转
         //BeanUtils.copyProperties();
 
         List<OrderDetail> orderDetailList =new ArrayList<>();

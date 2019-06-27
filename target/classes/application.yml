@@ -8,9 +8,9 @@ spring:
   jpa:
     show-sql: true
 
-#json显示的字符如果为空则不显示
-#  jackson:
-#    default-property-inclusion: non_null
+#全局配置json显示的字符如果为空null则不显示
+  jackson:
+    default-property-inclusion: non_null
 
   redis:
     host: 10.20.224.73
