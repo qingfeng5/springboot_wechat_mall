@@ -8,7 +8,7 @@ import com.springboot.form.OrderForm;
 import com.springboot.service.BuyerService;
 import com.springboot.service.OrderService;
 import com.springboot.utils.ResultVOUtil;
-import enums.ResultEnum;
+import com.springboot.enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -2,9 +2,8 @@ package com.springboot.service.impl;
 
 import com.springboot.dataobject.OrderDetail;
 import com.springboot.dto.OrderDTO;
-import com.springboot.service.OrderService;
-import enums.OrderStatusEnum;
-import enums.PayStatusEnum;
+import com.springboot.enums.OrderStatusEnum;
+import com.springboot.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,8 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * service订单测试

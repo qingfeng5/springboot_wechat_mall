@@ -1,7 +1,7 @@
 package com.springboot.service.impl;
 
 import com.springboot.dataobject.ProductInfo;
-import enums.ProductStatusEnum;
+import com.springboot.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * 查询商品测试
