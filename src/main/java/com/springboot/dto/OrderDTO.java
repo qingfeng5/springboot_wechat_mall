@@ -1,11 +1,16 @@
 package com.springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.springboot.dataobject.OrderDetail;
 import com.springboot.utils.serializer.Date2LongSerializer;
+import enums.OrderStatusEnum;
+import enums.PayStatusEnum;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

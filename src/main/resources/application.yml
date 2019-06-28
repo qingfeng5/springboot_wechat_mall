@@ -31,8 +31,3 @@ server:
 ##    root: warn
 ##    org.springframework.web: debug
 ##    org.hibernate: error
-
-wechat:
-  # 公众账号, 授权
-  mpAppId: wx73694811e68fd5db
-  mpAppSecret: b207afb2655d325f27abae0243c84545
