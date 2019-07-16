@@ -32,14 +32,14 @@ public class WechatController {
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
 
-      //  WxMpService wxMpService = new WxMpServiceImpl();
+        //  WxMpService wxMpService = new WxMpServiceImpl();
 
         //1、配置
 
         //2、调用方法
         //这是重定向到另外一个方法
         //这里的地址要填项目的地址，地址不能事127.0.0.1了，
-         String url ="http://qingfeng5.mynatapp.cc/sell/wechat/userInfo";
+        String url ="http://qingfeng5.mynatapp.cc/sell/wechat/userInfo";
         String redirectUrl=wxMpService.oauth2buildAuthorizationUrl(url,WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
 
 
@@ -51,7 +51,7 @@ public class WechatController {
 
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
-                         @RequestParam("state") String returnUrl){
+                           @RequestParam("state") String returnUrl){
         //获取AccessToken
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
@@ -62,7 +62,7 @@ public class WechatController {
         }
 
         //如果没有问题就拿到openid了
-       String openId= wxMpOAuth2AccessToken.getOpenId();
+        String openId= wxMpOAuth2AccessToken.getOpenId();
 
         return "redirect:" + returnUrl + "?openid=" + openId;
 

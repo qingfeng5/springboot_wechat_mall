@@ -25,7 +25,7 @@ public class OrderMasterRepositoryTest {
     @Autowired
     private OrderMasterRepository repository;
 
-    private final String OPENID = "110110";
+    private final String OPENID = "oTgZpwS8xX35iLZuuRXa62gRyW9s";
 
     /**
      * 测试保存的方法

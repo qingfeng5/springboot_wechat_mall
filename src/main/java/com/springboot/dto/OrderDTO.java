@@ -3,6 +3,8 @@ package com.springboot.dto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.springboot.dataobject.OrderDetail;
 import com.springboot.utils.serializer.Date2LongSerializer;
+import com.springboot.enums.OrderStatusEnum;
+import com.springboot.enums.PayStatusEnum;
 import lombok.Data;
 
 import java.math.BigDecimal;

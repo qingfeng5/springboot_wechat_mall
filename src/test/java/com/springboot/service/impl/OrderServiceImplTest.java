@@ -31,16 +31,16 @@ public class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
 
-    private final String BUYER_OPENID= "110110";
+    private final String BUYER_OPENID= "oTgZpwS8xX35iLZuuRXa62gRyW9s";
 
-    private final String ORDER_ID = "1561517534467682345";
+    private final String ORDER_ID = "156151753446768364";
 
     @Test
     public void create() {
         //构成dto对象，买家地址
         OrderDTO orderDTO =new OrderDTO();
         orderDTO.setBuyerName("清风");
-        orderDTO.setBuyerAddress("杭州下沙");
+        orderDTO.setBuyerAddress("浙江杭州");
         orderDTO.setBuyerPhone("123456789123");
         //很重要的openid，定义到外面
         orderDTO.setBuyerOpenid(BUYER_OPENID);
@@ -60,7 +60,7 @@ public class OrderServiceImplTest {
 
         //list加进去
         orderDetailList.add(o1);
-        orderDetailList.add(o2);
+        //orderDetailList.add(o2);
 
         orderDTO.setOrderDetailList(orderDetailList);
 
@@ -127,7 +127,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
-    public void findList1() {
+    public void List() {
         PageRequest request = PageRequest.of(0,2);
         Page<OrderDTO> orderDTOPage = orderService.findList(request);
 //        Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
