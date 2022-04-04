@@ -1,5 +1,6 @@
 package com.springboot.service.impl;
 
+import com.springboot.Exception.ResponseBankException;
 import com.springboot.Exception.SellException;
 import com.springboot.converter.OrderMaster2OrderDTOConverter;
 import com.springboot.dataobject.OrderDetail;
@@ -10,11 +11,12 @@ import com.springboot.dto.OrderDTO;
 import com.springboot.repository.OrderDetailRepository;
 import com.springboot.repository.OrderMasterRepository;
 import com.springboot.service.OrderService;
+import com.springboot.service.PayService;
 import com.springboot.service.ProductService;
 import com.springboot.utils.KeyUtil;
-import com.springboot.enums.OrderStatusEnum;
-import com.springboot.enums.PayStatusEnum;
-import com.springboot.enums.ResultEnum;
+import enums.OrderStatusEnum;
+import enums.PayStatusEnum;
+import enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
 
 
@@ -69,6 +75,7 @@ public class OrderServiceImpl implements OrderService {
             if (productInfo == null) {
                 //抛出异常，商品不存在
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                //这里抛异常，来自己出现200变成403，演示一下
 //                throw new ResponseBankException();
             }
 
@@ -240,6 +247,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
             //todo好处再于可以立马让你查到你写代码的地方，小技巧
             //TODO
+            payService.refund(orderDTO);
         }
 
         return orderDTO;

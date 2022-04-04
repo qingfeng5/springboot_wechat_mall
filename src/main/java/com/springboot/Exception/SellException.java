@@ -1,6 +1,6 @@
 package com.springboot.Exception;
 
-import com.springboot.enums.ResultEnum;
+import enums.ResultEnum;
 import lombok.Getter;
 
 /**

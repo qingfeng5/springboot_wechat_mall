@@ -1,13 +1,21 @@
 package com.springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.springboot.dataobject.OrderDetail;
+import com.springboot.utils.EnumUtil;
 import com.springboot.utils.serializer.Date2LongSerializer;
-import com.springboot.enums.OrderStatusEnum;
-import com.springboot.enums.PayStatusEnum;
+
+
+
+import enums.OrderStatusEnum;
+import enums.PayStatusEnum;
+
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,14 +70,24 @@ public class OrderDTO {
     //没有初始值，null
     List<OrderDetail> orderDetailList;
 
-//    @JsonIgnore
-//    public OrderStatusEnum getOrderStatusEnum() {
-//        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
-//    }
-//
-//    @JsonIgnore
-//    public PayStatusEnum getPayStatusEnum() {
-//        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
-//    }
+    /**买家端页面显示订单状态，o和1等的枚举来说明状态，不要用if语句来表达**/
+
+    /**在这个枚举中写一个遍历的方法，通过code的值返回这个枚举，这样把所有的遍历一遍
+     * 这个造成每一个枚举种豆要写这样的代价，这就是不合理之处
+     * 别人优秀的地方在于，省去不合理地方，不能以为复制粘贴就是好的
+     * 这样我们可以写一个公用的方法**/
+
+    /**OrderStatusEnum和PayStatusEnum都能实现一个接口
+     * 通过枚举工具实现**/
+    //JsonIgnore转换成json格式时就会忽略这个方法
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 
 }

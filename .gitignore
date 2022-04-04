@@ -1,1 +1,28 @@
-# Created by .ignore support plugin (hsz.mobi)
+*.class
+#package file
+*.jar
+*.war
+*.ear
+#kdiff3 ignore
+*.orig
+#maven ignore
+target/
+#eclipse ignore
+.settings/
+.project
+.classpatch
+#idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+# temp file 临时文件也不要
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+# system ignore
+.DS_Store
+Thumbs.db

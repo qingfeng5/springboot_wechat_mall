@@ -1,0 +1,68 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://127.0.0.1:3306/sell?characterEncoding=utf-8&useSSL=false
+
+  #10.20.224.73
+  jpa:
+    show-sql: true
+
+#全局配置json显示的字符如果为空null则不显示
+  jackson:
+    default-property-inclusion: non_null
+
+#  redis:
+#    host: 127.0.0.1
+#    host: 127.0.0.1
+#    port: 6379
+
+#url的前缀
+server:
+  servlet:
+    context-path: /sell
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#     com.springboot.LoggerTest: debug
+##    root: warn
+##    org.springframework.web: debug
+
+##    org.hibernate: error
+
+wechat:
+  # 公众账号, 授权
+  mpAppId: xxxxxxxxxxxxxx
+  mpAppSecret: xxxxxxxxxxxxxxxxx
+
+#注：如果借用别人的账号，支付openid和授权openid是分开的，你单独支付可以使用别人的，但是授权openid就要用自己的
+#支付/商户号
+#  mpAppId: xxxxxxxxxxx
+#  mpAppSecret:
+  mchId: xxxx
+  mchKey: xxxxxxxxxx
+  #发起支付不需要证书，退款需要
+  keyPath: /springboot_order/h5.p12
+  notifyUrl: xxxxxxxx/pay/notify
+
+#开放平台买家扫码登录用
+  openAppId: xxxxxxxxxx
+  openAppSecret: xxxxxxxxxxxxx
+
+project-url:
+  wechatMpAuthorize: http://xxxxxxxxx.cc
+  wechatOpenAuthorize: http://xxxxxxxxxx.cc
+  sell: http://xxxxxxxxxxx.cc
+
+#日志查看加入数据库的各项参数
+logging:
+  level:
+    com.springboot.dataobject.mapper: trace
+
+#xml加入数据库，查询数据
+#xml这种不适用，不如mybatis注解
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

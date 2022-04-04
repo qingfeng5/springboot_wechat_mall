@@ -1,6 +1,8 @@
 package com.springboot.service;
 
 import com.lly835.bestpay.model.PayResponse;
+
+import com.lly835.bestpay.model.RefundResponse;
 import com.springboot.dto.OrderDTO;
 
 /**
@@ -12,4 +14,10 @@ import com.springboot.dto.OrderDTO;
 public interface PayService {
 
     PayResponse create(OrderDTO orderDTO);
+
+    //支付异常
+    PayResponse  notify(String notifyData);
+
+    //退款
+    RefundResponse refund(OrderDTO orderDTO);
 }

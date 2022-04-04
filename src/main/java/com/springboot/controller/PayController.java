@@ -3,9 +3,10 @@ package com.springboot.controller;
 import com.lly835.bestpay.model.PayResponse;
 import com.springboot.Exception.SellException;
 import com.springboot.dto.OrderDTO;
-import com.springboot.enums.ResultEnum;
+
 import com.springboot.service.OrderService;
 import com.springboot.service.PayService;
+import enums.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -59,11 +60,12 @@ public class PayController {
      * 微信异步通知
      * @param notifyData
      */
-//    @PostMapping("/notify")
-//    public ModelAndView notify(@RequestBody String notifyData) {
-//        payService.notify(notifyData);
-//
-//        //返回给微信处理结果
-//        return new ModelAndView("pay/success");
-//    }
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData) {
+        //notifyData逻辑下载service
+        payService.notify(notifyData);
+
+        //返回给微信处理结果
+        return new ModelAndView("pay/success");
+    }
 }

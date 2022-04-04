@@ -3,13 +3,17 @@ package com.springboot.VO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *商品（包含类目）
  */
 @Data
-public class ProductVO {
+public class ProductVO implements Serializable {
+
+
+    private static final long serialVersionUID = 2974026889738211757L;
 
     //具体name名字
     //返回前端，加个注解

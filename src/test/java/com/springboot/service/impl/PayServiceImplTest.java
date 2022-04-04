@@ -28,9 +28,18 @@ public class PayServiceImplTest {
     @Autowired
     private OrderService orderService;
 
+    /**支付创建订单**/
     @Test
     public void create() throws Exception{
         OrderDTO orderDTO =orderService.findOne("1563069508583141846");
         payService.create(orderDTO);
     }
+
+    /**退款订单**/
+    @Test
+    public void refund(){
+        OrderDTO orderDTO =orderService.findOne("1563253330258142320");
+        payService.refund(orderDTO);
+    }
+
 }

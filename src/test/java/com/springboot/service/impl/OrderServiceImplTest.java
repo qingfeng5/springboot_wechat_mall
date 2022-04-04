@@ -2,8 +2,9 @@ package com.springboot.service.impl;
 
 import com.springboot.dataobject.OrderDetail;
 import com.springboot.dto.OrderDTO;
-import com.springboot.enums.OrderStatusEnum;
-import com.springboot.enums.PayStatusEnum;
+import com.springboot.service.OrderService;
+import enums.OrderStatusEnum;
+import enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * service订单测试
@@ -126,11 +129,16 @@ public class OrderServiceImplTest {
 
     }
 
+    /**
+     * 测试所有人的订单查询
+     */
     @Test
     public void List() {
         PageRequest request = PageRequest.of(0,2);
         Page<OrderDTO> orderDTOPage = orderService.findList(request);
 //        Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
+        //根据上面统一下，判断它的总数是否大于0
+        //这个写出好处，就是如果出错可以把出错行的信息的打印出来
         Assert.assertTrue("查询所有的订单列表", orderDTOPage.getTotalElements() > 0);
     }
 

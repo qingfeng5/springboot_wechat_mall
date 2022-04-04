@@ -10,6 +10,8 @@ import com.springboot.service.ProductService;
 import com.springboot.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +45,8 @@ public class BuyerProductController {
     //get请求
     @GetMapping("/list")
     //使用VO中ResultVO对象
+//    @Cacheable(cacheNames = "product",key = "123")
+    @CacheEvict(cacheNames = "product",key = "123")
     public ResultVO list(){
         //1、查询所有的上架商品
         List<ProductInfo> productInfoList =productService.findUpAll();

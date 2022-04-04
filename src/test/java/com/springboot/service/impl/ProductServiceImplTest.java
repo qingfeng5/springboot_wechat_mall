@@ -1,7 +1,7 @@
 package com.springboot.service.impl;
 
 import com.springboot.dataobject.ProductInfo;
-import com.springboot.enums.ProductStatusEnum;
+import enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * 查询商品测试
@@ -65,8 +67,21 @@ public class ProductServiceImplTest {
         productInfo.setProductIcon("http://xxxxx.jpg");
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
         productInfo.setCategoryType(2);
-
         ProductInfo result = productService.save(productInfo);
         Assert.assertNotNull(result);
+    }
+
+    /**上架*/
+    @Test
+    public void onSale() {
+        ProductInfo result = productService.onSale("123457");
+        Assert.assertEquals(ProductStatusEnum.UP, result.getProductStatusEnum());
+    }
+
+    /**下架商品*/
+    @Test
+    public void offSale() {
+        ProductInfo result = productService.offSale("123457");
+        Assert.assertEquals(ProductStatusEnum.DOWN, result.getProductStatusEnum());
     }
 }

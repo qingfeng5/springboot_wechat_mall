@@ -1,9 +1,14 @@
 package com.springboot.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.utils.EnumUtil;
+import enums.ProductStatusEnum;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +17,11 @@ import java.util.Date;
  */
 @Entity
 @Data
-public class ProductInfo {
+//时间自动跟新
+@DynamicUpdate
+public class ProductInfo  implements Serializable {
+
+    private static final long serialVersionUID = -1244468619968810269L;
 
     @Id
     private String productId;
@@ -33,13 +42,39 @@ public class ProductInfo {
     private String productIcon;
 
     /** 状态, 0正常1下架. */
-    private Integer productStatus ;
-            //= ProductStatusEnum.UP.getCode();
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /** 类目编号. */
     private Integer categoryType;
 
     private Date createTime;
 
+    //时间自动更新
     private Date updateTime;
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
+    }
+
+    /**
+     * 图片链接加host拼接成完整 url
+     * @param host
+     * @return
+     */
+    public ProductInfo addImageHost(String host) {
+        if (productIcon.startsWith("//") || productIcon.startsWith("http")) {
+            return this;
+        }
+
+        if (!host.startsWith("http")) {
+            host = "//" + host;
+        }
+        if (!host.endsWith("/")) {
+            host = host + "/";
+        }
+        productIcon = host + productIcon;
+        return this;
+    }
+
 }
